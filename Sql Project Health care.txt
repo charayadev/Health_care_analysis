@@ -1,0 +1,33 @@
+Part 1: Getting to Know the Data
+Patient Basics: Count how many total patients are in the list. Also, find the youngest and oldest patient age.
+
+Health Issues: Show a list of all the different medical conditions (like Cancer or Diabetes) and how many patients have each one.
+
+Hospital List: Which hospitals appear most often in this data? Show the top 5.
+
+Part 2: Looking at Money and Insurance
+Cost of Sickness: On average, which medical condition costs the most money to treat?
+
+Insurance Companies: Which insurance company (like Aetna or Medicare) has paid the most total "Billing Amount"?
+
+Medication Check: For patients with "Diabetes," what is the most common medicine they are given?
+
+Part 3: Deep Dive Analysis
+Hospital Stay: Figure out how many days each patient spent in the hospital (Discharge Date minus Admission Date). What is the average stay for all patients?
+
+Blood Types: How many patients have "O+" blood? What is the most common medical condition for them?
+
+The Busiest Month: In which month of the year do most patients get admitted to the hospital?
+
+Expensive Cases: List the names of patients who had a bill higher than $40,000.
+
+Part 4: Interview-Style Challenges
+Doctor Search: Find if any doctor has worked at more than one different hospital.
+
+Test Results: Out of all the tests done, what percentage came back as "Abnormal"?
+
+Emergency vs. Planned: Compare the average bill for an "Emergency" admission versus an "Elective" (planned) admission.
+
+Age Categories: Group the patients into "Young" (under 30), "Middle-aged" (30-60), and "Senior" (over 60). Count how many are in each group.
+
+Room Usage: Which room number is used the most for "Urgent" cases?
