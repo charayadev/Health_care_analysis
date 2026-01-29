@@ -51,5 +51,63 @@ select  doctor, count(distinct(patient_name))  from healthcare_data group by 1 o
 -- total hospital we have
 select distinct(hospital) , count(distinct(patient_name)) from healthcare_data group by 1 order by 2 desc;
 
+-- Begning with the problems
+
+/*-----
+----
+Part 1: Getting to Know the Data
+----
+----*/
+
+--Count how many total patients are in the list. Also, find the youngest and oldest patient age.
+SELECT count(distinct(patient_name)) as total_Patient, min(age) as minimum_age, max(age) as maximum_age from HEALTHCARE_DATA;
+
+--Show a list of all the different medical conditions (like Cancer or Diabetes) and how many patients have each one.
+select medical_condition, count(distinct(patient_name)) as total_Patient  from healthcare_data group by 1 order 
+by 2 desc;
+
+--Which hospitals appear most often in this data? Show the top 5.
+select hospital, count(distinct(patient_name)) as total_Patient  from healthcare_data group by 1 order 
+by 2 desc limit 5;
+
+
+/*-----
+----
+Part 2: Looking at Money and Insurance
+----
+----*/ 
+
+--On average, which medical condition costs the most money to treat?
+select medical_condition, round(avg(billing_amount),2) as avgerage from healthcare_data group by 1 order by 2 desc;
+
+--Which insurance company (like Aetna or Medicare) has paid the most total "Billing Amount"?
+select insurance_provider, sum(billing_amount) as total_paid from healthcare_data group by 1 order by 2 desc;
+
+
+--For patients with "Diabetes," what is the most common medicine they are given?
+select medication, count(distinct(patient_name)) as total_patient from healthcare_data
+where medical_condition = 'Diabetes' group by 1 order by 2 desc;
+
+/*-----
+----
+Part 3: Looking at Money and Insurance
+----
+----*/ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
