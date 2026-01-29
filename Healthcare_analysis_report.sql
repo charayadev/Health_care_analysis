@@ -94,9 +94,7 @@ Part 3: Looking at Money and Insurance
 ----
 ----*/ 
 
-
-
-
+--Figure out how many days each patient spent in the hospital (Discharge Date minus Admission Date). What is the average stay for all patients?
 
 
 
