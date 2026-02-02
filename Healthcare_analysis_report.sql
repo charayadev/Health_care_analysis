@@ -96,16 +96,112 @@ Part 3: Looking at Money and Insurance
 
 --Figure out how many days each patient spent in the hospital (Discharge Date minus Admission Date). What is the average stay for all patients?
 
+select * from healthcare_data;
+
+
+with no_of_day_in as (select patient_name, discharge_date-date_of_admission as no_of_days from healthcare_data)
+select patient_name, no_of_days, avg(no_of_days) over() from no_of_day_in;
+
+
+--Blood Types: How many patients have "O+" blood? What is the most common medical condition for them?
+
+select medical_condition,count(distinct(patient_name)) as number  from healthcare_data  where blood_type = 'O+'
+group by medical_condition order by 2 desc limit 1;
+
+
+
+--The Busiest Month: In which month of the year do most patients get admitted to the hospital?
+
+SELECT 
+    TO_CHAR(date_of_admission , 'Month') AS admission_month,
+	count(distinct(patient_name)) as total_patient
+FROM healthcare_data
+group by 1
+order by 2 desc
+limit 1;
+
+
+--List the names of patients who had a bill higher than $40,000
+select patient_name from healthcare_data where billing_amount > 40000;
 
 
 
 
+/*-----
+----
+Part 4	: Interview-Style Challenges
+
+----
+----*/ 
+ select * from healthcare_data;
+
+
+--Find if any doctor has worked at more -than one different hospital.
+select count(distinct(doctor)) , count(distinct(hospital)) from healthcare_data;
+
+-- lets retrieve them
+select hospital,count(distinct(doctor)) as no_of_doctor from healthcare_data group by 1
+having count(distinct(doctor)) >1 ;
+
+
+--- actual pair
+select doctor, hospital 
+from healthcare_data 
+where doctor in (select doctor  from healthcare_data group by 1
+having count(distinct(hospital)) >1 
+)
+order by 1 , 2;
 
 
 
+--  Out of all the tests done, what percentage came back as "Abnormal"?
+
+select count(distinct(patient_name)) as normal from healthcare_data;
+
+with abnormal_Cases as(select count(distinct(patient_name))  as no_of_abnormal from healthcare_data where test_results = 'Abnormal'),
+normal_cases as (select count(distinct(patient_name))  as no_of_normal from healthcare_data )
+
+select 
+no_of_abnormal * 100 / no_of_normal  as per_of_abnormal
+from abnormal_Cases,normal_cases;
 
 
 
+/*
+per = no. of abnormal * 100 / total patent 
+
+*/
+
+
+--Compare the average bill for an "Emergency" admission versus an "Elective" (planned) admission.
+with emergency as(select avg(billing_amount) as avg_emergengecy from healthcare_data where admission_type = 'Emergency') ,
+elective as (select avg(billing_amount) as avg_elective from healthcare_data where admission_type = 'Elective')
+
+select avg_emergengecy , avg_elective from 
+emergency , elective
+order by 1 , 2 desc;
+
+
+
+--Group the patients into "Young" (under 30), "Middle-aged" (30-60), and "Senior" (over 60). Count how many are in each group.
+
+select*,
+case when age < 30 THEN 'Under 30'
+     when age > 30 and age < 60 THEN 'Middle-aged'
+	 else 'Senior'
+end as age_group
+from healthcare_data;
+
+
+--Room Usage: Which room number is used the most for "Urgent" cases?
+
+SELECT room_number,
+       COUNT(*) AS urgent_cases
+FROM healthcare_data
+WHERE admission_type = 'Urgent'
+GROUP BY room_number
+ORDER BY urgent_cases DESC
+LIMIT 1;
 
 
 
