@@ -155,53 +155,6 @@ order by 1 , 2;
 
 
 --  Out of all the tests done, what percentage came back as "Abnormal"?
-
-select count(distinct(patient_name)) as normal from healthcare_data;
-
-with abnormal_Cases as(select count(distinct(patient_name))  as no_of_abnormal from healthcare_data where test_results = 'Abnormal'),
-normal_cases as (select count(distinct(patient_name))  as no_of_normal from healthcare_data )
-
-select 
-no_of_abnormal * 100 / no_of_normal  as per_of_abnormal
-from abnormal_Cases,normal_cases;
-
-
-
-/*
-per = no. of abnormal * 100 / total patent 
-
-*/
-
-
---Compare the average bill for an "Emergency" admission versus an "Elective" (planned) admission.
-with emergency as(select avg(billing_amount) as avg_emergengecy from healthcare_data where admission_type = 'Emergency') ,
-elective as (select avg(billing_amount) as avg_elective from healthcare_data where admission_type = 'Elective')
-
-select avg_emergengecy , avg_elective from 
-emergency , elective
-order by 1 , 2 desc;
-
-
-
---Group the patients into "Young" (under 30), "Middle-aged" (30-60), and "Senior" (over 60). Count how many are in each group.
-
-select*,
-case when age < 30 THEN 'Under 30'
-     when age > 30 and age < 60 THEN 'Middle-aged'
-	 else 'Senior'
-end as age_group
-from healthcare_data;
-
-
---Room Usage: Which room number is used the most for "Urgent" cases?
-
-SELECT room_number,
-       COUNT(*) AS urgent_cases
-FROM healthcare_data
-WHERE admission_type = 'Urgent'
-GROUP BY room_number
-ORDER BY urgent_cases DESC
-LIMIT 1;
-
+select
 
 
