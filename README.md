@@ -1,5 +1,4 @@
 # Healthcare Data Analysis Project (SQL)
-
 ## Project Overview
 This project involves a comprehensive analysis of a healthcare dataset containing 55,500 patient records. The goal was to transform raw, messy data into actionable insights regarding patient demographics, hospital stays, and billing trends.
 
